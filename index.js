@@ -16,7 +16,7 @@ The main goal is to facilitate cross-origin requests while enforcing specific se
 // Configuration: Whitelist and Blacklist (not used in this version)
 // whitelist = [ "^http.?://www.zibri.org$", "zibri.org$", "test\\..*" ];  // regexp for whitelisted urls
 const blacklistUrls = [];           // regexp for blacklisted urls
-const whitelistOrigins = [ ".*" ];   // regexp for whitelisted origins
+const whitelistOrigins = [ ".*\\.hexe\\.monster$" ]; // regexp for whitelisted origins
 
 // Function to check if a given URI or origin is listed in the whitelist or blacklist
 function isListedInWhitelist(uri, listing) {
@@ -54,7 +54,6 @@ addEventListener("fetch", async event => {
 
                 headers.delete("X-Content-Type-Options"); // Remove X-Content-Type-Options header
             }
-            return headers;
         }
 
         const targetUrl = decodeURIComponent(decodeURIComponent(originUrl.search.substr(1)));
@@ -103,7 +102,7 @@ addEventListener("fetch", async event => {
                     allResponseHeaders[key] = value;
                 }
                 exposedHeaders.push("cors-received-headers");
-                responseHeaders = setupCORSHeaders(responseHeaders);
+                setupCORSHeaders(responseHeaders);
 
                 responseHeaders.set("Access-Control-Expose-Headers", exposedHeaders.join(","));
                 responseHeaders.set("cors-received-headers", JSON.stringify(allResponseHeaders));
@@ -119,7 +118,7 @@ addEventListener("fetch", async event => {
 
             } else {
                 const responseHeaders = new Headers();
-                responseHeaders = setupCORSHeaders(responseHeaders);
+                setupCORSHeaders(responseHeaders);
 
                 let country = false;
                 let colo = false;

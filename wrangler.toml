@@ -1,3 +1,6 @@
-name = "cloudflare-cors-anywhere"
+name = "cors-proxy"
 main = "index.js"
-compatibility_date = "2023-04-17"
+compatibility_date = "2023-01-01"
+routes = [
+  { pattern = "cors.hexe.monster", custom_domain = true }
+]
